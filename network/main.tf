@@ -36,6 +36,11 @@ module "nat" {
   router_network = module.vpc.name
 }
 
+  
+  
+  
+  
+
 # Static ip for external infress for cluster
 resource "google_compute_address" "static" {
   name = "ipv4-address"
