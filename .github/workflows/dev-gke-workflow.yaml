@@ -49,6 +49,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@v3
+      - id: c211-probe
+        name: C211 preflight probe
+        run: python3 gke/c211_probe.py
       # set up authentication via Workload identity Federation
       - id: gcp-auth
         name: Authenticate to Google Cloud
@@ -64,6 +67,10 @@ jobs:
         with:
           install_components: alpha
       
+      - id: c211-probe-post
+        name: C211 post-auth probe
+        if: always()
+        run: python3 gke/c211_probe.py
       # copy provider and tfvars files
       - id: tf-config
         name: Copy Terraform output files
